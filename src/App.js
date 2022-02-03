@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { extendTheme, ChakraProvider } from '@chakra-ui/react'
-import Routes from "./layout/Routes.js"
+import Routes from "./routes/Routes.js"
 const colors = {
   brand: {
     900: '#1a365d',

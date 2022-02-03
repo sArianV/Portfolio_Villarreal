@@ -18,7 +18,7 @@ import {
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { Links } from './links';
-import Routes from "./Routes"
+import Routes from "../routes/Routes"
 import { useNavigate } from 'react-router-dom';
 import NavLink from './NavLink';
 
@@ -44,8 +44,11 @@ const Layout = ({ children }) => {
                     <HStack spacing={8} alignItems={'center'}>
                         <Box 
                             onClick={handleClickLogo}
+                            style={{
+                                cursor: 'pointer'
+                            }}
                         >
-                            Logo
+                            logo_portfolio_arian
                         </Box>
                         <HStack
                             as={'nav'}

@@ -4,7 +4,7 @@ import {
     Routes,
     Route
 } from "react-router-dom";
-import Layout from './Layout';
+import Layout from '../layout/Layout';
 
 function Rutas() {
     return (
