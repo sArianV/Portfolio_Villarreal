@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import React from 'react';
 import {
     Box,
     Flex,
@@ -19,27 +19,16 @@ import {
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { Links } from './links';
 import Routes from "./Routes"
+import { useNavigate } from 'react-router-dom';
+import NavLink from './NavLink';
 
-
-const NavLink = ({ link }) => {
-    console.log(link)
-    return (
-        <Link
-            px={2}
-            py={1}
-            rounded={'md'}
-            _hover={{
-                textDecoration: 'none',
-                bg: useColorModeValue('gray.200', 'gray.700'),
-            }}
-            href={link?.path}>
-            {link?.name}
-        </Link>
-    )
-}
-
-export default function Layout() {
+const Layout = ({ children }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
+    let navigate = useNavigate();
+
+    const handleClickLogo = () => {
+       navigate("/");
+    }
 
     return (
         <>
@@ -53,18 +42,24 @@ export default function Layout() {
                         onClick={isOpen ? onClose : onOpen}
                     />
                     <HStack spacing={8} alignItems={'center'}>
-                        <Box>Logo</Box>
+                        <Box 
+                            onClick={handleClickLogo}
+                        >
+                            Logo
+                        </Box>
                         <HStack
                             as={'nav'}
                             spacing={4}
                             display={{ base: 'none', md: 'flex' }}>
+                            
                             {Links.map((link) => (
                                 <NavLink key={link.name} link={link} />
                             ))}
+
                         </HStack>
                     </HStack>
                     <Flex alignItems={'center'}>
-                        <Menu>
+                        {/* <Menu>
                             <MenuButton
                                 as={Button}
                                 rounded={'full'}
@@ -84,7 +79,7 @@ export default function Layout() {
                                 <MenuDivider />
                                 <MenuItem>Link 3</MenuItem>
                             </MenuList>
-                        </Menu>
+                        </Menu> */}
                     </Flex>
                 </Flex>
 
@@ -99,7 +94,8 @@ export default function Layout() {
                 ) : null}
             </Box>
 
-            <Box p={4}> <Routes /> </Box>
+            <Box p={4}> { children } </Box>
         </>
     );
 }
+export default Layout;

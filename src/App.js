@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { extendTheme, ChakraProvider } from '@chakra-ui/react'
-import Layout from "./layout/Layout.js"
+import Routes from "./layout/Routes.js"
 const colors = {
   brand: {
     900: '#1a365d',
@@ -16,7 +16,7 @@ function App() {
   // 2. Wrap ChakraProvider at the root of your app
   return (
     <ChakraProvider theme={theme} >
-      <Layout />
+      <Routes />
     </ChakraProvider>
   )
 }
