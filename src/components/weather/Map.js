@@ -1,33 +1,78 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useMapEvents } from 'react-leaflet';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import { useSize } from '../../hooks/useResizeObserver';
 import styles from './map.module.css';
 
-function Map() {
-    const defaultPosition = [-33.1263605, -64.3568481]
-    const ref = useRef(null)
-    const size = useSize(ref)
+function Map(props) {
+    const [myPosition, setMyPosition] = useState()
+    const { selectedPosition, setSelectedPosition } = props
 
-    console.log(size);
+    useEffect(() => {
+        setMyPosition([-33.1263605, -64.3568481])
+    }, []);
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(position => {
+            const { latitude, longitude } = position.coords;
+            if ( latitude && longitude ) {
+                setMyPosition([latitude, longitude]);
+            }
+        });
+    }, []);
+
+    const Markers = (props) => {
+        const { myPosition, selectedPosition, setSelectedPosition } = props;
+
+        useEffect(() => {
+            if (!selectedPosition) {
+                map.flyTo(myPosition, 15);
+                setSelectedPosition(myPosition)
+            }
+        }, []);
+        
+        const map = useMapEvents({
+            click(e) {
+                map.flyTo(e.latlng, 13);
+                setSelectedPosition([
+                    e.latlng.lat,
+                    e.latlng.lng
+                ]);
+            },
+
+        })
+
+        return (
+            selectedPosition ?
+                <Marker
+                    key={selectedPosition[0]}
+                    position={selectedPosition}
+                    interactive={false}
+                />:
+            null
+        )
+
+    }
+
     return (
-        <div className={styles.root} ref={ref}>
-            <MapContainer 
-                center={defaultPosition} 
-                zoom={13} 
+        <div className={styles.root} >
+            <MapContainer
+                center={[0, 0]}
+                zoom={13}
                 scrollWheelZoom={true}
                 style={{ height: '100%', width: '100%' }}
             >
                 <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-                <Marker position={defaultPosition}>
-                    <Popup>
-                        A pretty CSS3 popup. <br /> Easily customizable.
-                    </Popup>
-                </Marker>
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                <Markers 
+                    myPosition={myPosition}
+                    selectedPosition={selectedPosition}
+                    setSelectedPosition={setSelectedPosition}
+                />
             </MapContainer>
-            </div>
+        </div>
     );
 }
 

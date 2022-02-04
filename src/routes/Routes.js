@@ -5,7 +5,7 @@ import {
     Route
 } from "react-router-dom";
 import Layout from '../layout/Layout';
-import Weather from '../screens/weather';
+import Weather from '../screens/Weather';
 
 function Rutas() {
     return (

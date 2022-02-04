@@ -1,28 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, SimpleGrid, Wrap, WrapItem } from '@chakra-ui/react';
 import MapContainer from '../components/weather/MapContainer';
 
 import styles from './weather.module.css';
 import { extendTheme } from '@chakra-ui/react'
 import { createBreakpoints } from '@chakra-ui/theme-tools'
+import WeatherContainer from '../components/weather/WeatherContainer';
 
 
 
-function weather() {
-
+function Weather() {
+    const [selectedPosition, setSelectedPosition] = useState();
     return (
         <SimpleGrid columns={responsiveColums} spacingX='20px' spacingY='10px' className={styles.box}>
             <Box className={styles.map} >
-                <MapContainer />
+                <MapContainer 
+                    selectedPosition={selectedPosition}
+                    setSelectedPosition={setSelectedPosition}
+                />
             </Box>
             <Box className={styles.weather_container} > 
-                asd
+                <WeatherContainer 
+                    selectedPosition={selectedPosition}
+                />
             </Box>
         </SimpleGrid>
     );
 }
 
-export default weather;
+export default Weather;
 
 // 2. Update the breakpoints as key-value pairs
 const breakpoints = createBreakpoints({

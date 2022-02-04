@@ -2,23 +2,22 @@ import React from 'react';
 import {
     Box,
     Flex,
-    Avatar,
+   // Avatar,
     HStack,
-    Link,
+    //Link,
     IconButton,
-    Button,
+    /* Button,
     Menu,
     MenuButton,
     MenuList,
     MenuItem,
-    MenuDivider,
+    MenuDivider, */
     useDisclosure,
     useColorModeValue,
     Stack,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { Links } from './links';
-import Routes from "../routes/Routes"
 import { useNavigate } from 'react-router-dom';
 import NavLink from './NavLink';
 
