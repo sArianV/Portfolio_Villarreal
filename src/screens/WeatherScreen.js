@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box, SimpleGrid, Wrap, WrapItem } from '@chakra-ui/react';
 import MapContainer from '../components/weather/MapContainer';
 
-import styles from './weather.module.css';
+import styles from './weatherScreen.module.css';
 import { extendTheme } from '@chakra-ui/react'
 import { createBreakpoints } from '@chakra-ui/theme-tools'
 import WeatherContainer from '../components/weather/WeatherContainer';
