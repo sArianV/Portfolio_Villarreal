@@ -116,7 +116,7 @@ const Layout = ({ children }) => {
                     width: "100%",
                     minHeight: "calc(100% - 4em)",
                     maxHeight: "calc(100% - 4em)",
-                    padding: "0px",
+                    padding: "1em",
                     margin: "0px",
                 }}
             >
