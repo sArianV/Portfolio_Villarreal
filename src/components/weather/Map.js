@@ -9,10 +9,6 @@ function Map(props) {
     const { selectedPosition, setSelectedPosition } = props
 
     useEffect(() => {
-        setMyPosition([-33.1263605, -64.3568481])
-    }, []);
-
-    useEffect(() => {
         navigator.geolocation.getCurrentPosition(position => {
             const { latitude, longitude } = position.coords;
             if ( latitude && longitude ) {
@@ -25,11 +21,11 @@ function Map(props) {
         const { myPosition, selectedPosition, setSelectedPosition } = props;
 
         useEffect(() => {
-            if (!selectedPosition) {
+            if (!selectedPosition && myPosition) {
                 map.flyTo(myPosition, 15);
                 setSelectedPosition(myPosition)
             }
-        }, []);
+        }, [myPosition]);
         
         const map = useMapEvents({
             click(e) {
