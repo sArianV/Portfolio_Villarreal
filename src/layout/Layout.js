@@ -27,42 +27,55 @@ const Layout = ({ children }) => {
     let navigate = useNavigate();
 
     const handleClickLogo = () => {
-       navigate("/");
+        navigate("/");
     }
 
     return (
-        <>
-            <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
-                <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-                    <IconButton
-                        size={'md'}
-                        icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-                        aria-label={'Open Menu'}
-                        display={{ md: 'none' }}
-                        onClick={isOpen ? onClose : onOpen}
-                    />
-                    <HStack spacing={8} alignItems={'center'}>
-                        <Box 
-                            onClick={handleClickLogo}
-                            style={{
-                                cursor: 'pointer'
-                            }}
-                        >
-                            logo_portfolio_arian
-                        </Box>
-                        <HStack
-                            as={'nav'}
-                            spacing={4}
-                            display={{ base: 'none', md: 'flex' }}>
-                            
-                            {Links.map((link) => (
-                                <NavLink key={link.name} link={link} />
-                            ))}
+        <div
+            style={{
+                display: 'flex',
+                flexDirection: 'column',
+                height: '100vh',
+                overflow: 'hidden',
+            }}
+        >
+            <div
+                style={{
+                    width: '100%',
+                    height: '4em',
+                }}
+            >
+                <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
+                    <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
+                        <IconButton
+                            size={'md'}
+                            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+                            aria-label={'Open Menu'}
+                            display={{ md: 'none' }}
+                            onClick={isOpen ? onClose : onOpen}
+                        />
+                        <HStack spacing={8} alignItems={'center'}>
+                            <Box
+                                onClick={handleClickLogo}
+                                style={{
+                                    cursor: 'pointer'
+                                }}
+                            >
+                                logo_portfolio_arian
+                            </Box>
+                            <HStack
+                                as={'nav'}
+                                spacing={4}
+                                display={{ base: 'none', md: 'flex' }}>
 
+                                {Links.map((link) => (
+                                    <NavLink key={link.name} link={link} />
+                                ))}
+
+                            </HStack>
                         </HStack>
-                    </HStack>
-                    <Flex alignItems={'center'}>
-                        {/* <Menu>
+                        <Flex alignItems={'center'}>
+                            {/* <Menu>
                             <MenuButton
                                 as={Button}
                                 rounded={'full'}
@@ -83,22 +96,33 @@ const Layout = ({ children }) => {
                                 <MenuItem>Link 3</MenuItem>
                             </MenuList>
                         </Menu> */}
+                        </Flex>
                     </Flex>
-                </Flex>
 
-                {isOpen ? (
-                    <Box pb={4} display={{ md: 'none' }}>
-                        <Stack as={'nav'} spacing={4}>
-                            {Links.map((link) => (
-                                <NavLink key={link}>{link}</NavLink>
-                            ))}
-                        </Stack>
-                    </Box>
-                ) : null}
-            </Box>
-
-            <Box p={4}> { children } </Box>
-        </>
+                    {isOpen ? (
+                        <Box pb={4} display={{ md: 'none' }}>
+                            <Stack as={'nav'} spacing={4}>
+                                {Links.map((link) => (
+                                    <NavLink key={link}>{link}</NavLink>
+                                ))}
+                            </Stack>
+                        </Box>
+                    ) : null}
+                </Box>
+            </div>
+            <div
+                className="myBody"
+                style={{
+                    width: "100%",
+                    minHeight: "calc(100% - 4em)",
+                    maxHeight: "calc(100% - 4em)",
+                    padding: "0px",
+                    margin: "0px",
+                }}
+            >
+                {children}
+            </div>
+        </div>
     );
 }
 export default Layout;

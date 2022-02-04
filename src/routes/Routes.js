@@ -5,6 +5,7 @@ import {
     Route
 } from "react-router-dom";
 import Layout from '../layout/Layout';
+import Weather from '../screens/weather';
 
 function Rutas() {
     return (
@@ -13,7 +14,7 @@ function Rutas() {
                 <Routes>
                     <Route path="/" element={<p>home</p>} />
                     <Route path="/sandbox" element={<p>sandbox</p>} />
-                    <Route path="/weather" element={<p>clima</p>} />
+                    <Route path="/weather" element={ <Weather />} />
                 </Routes>
             </Layout>
         </BrowserRouter>
