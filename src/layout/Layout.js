@@ -2,7 +2,7 @@ import React from 'react';
 import {
     Box,
     Flex,
-   // Avatar,
+    // Avatar,
     HStack,
     //Link,
     IconButton,
@@ -35,13 +35,17 @@ const Layout = ({ children }) => {
                 display: 'flex',
                 flexDirection: 'column',
                 height: '100vh',
+
                 overflow: 'hidden',
             }}
         >
             <div
                 style={{
                     width: '100%',
-                    height: '4em',
+                    minHeight: '4em',
+                    marginBottom:"1px",
+                    zIndex: 2,
+
                 }}
             >
                 <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
@@ -99,10 +103,10 @@ const Layout = ({ children }) => {
                     </Flex>
 
                     {isOpen ? (
-                        <Box pb={4} display={{ md: 'none' }}>
+                        <Box pb={4} display={{ md: 'none' }} style={{ zIndex:10}} >
                             <Stack as={'nav'} spacing={4}>
                                 {Links.map((link) => (
-                                    <NavLink key={link}>{link}</NavLink>
+                                    <NavLink key={link.name + "nav"} link={link} />
                                 ))}
                             </Stack>
                         </Box>
@@ -112,6 +116,7 @@ const Layout = ({ children }) => {
             <div
                 className="myBody"
                 style={{
+                    zIndex: 1,
                     width: "100%",
                     minHeight: "calc(100% - 4em)",
                     maxHeight: "calc(100% - 4em)",
