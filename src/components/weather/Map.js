@@ -11,7 +11,7 @@ function Map(props) {
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(position => {
             const { latitude, longitude } = position.coords;
-            if ( latitude && longitude ) {
+            if (latitude && longitude) {
                 setMyPosition([latitude, longitude]);
             }
         });
@@ -26,7 +26,7 @@ function Map(props) {
                 setSelectedPosition(myPosition)
             }
         }, [myPosition]);
-        
+
         const map = useMapEvents({
             click(e) {
                 map.flyTo(e.latlng, 13);
@@ -44,8 +44,8 @@ function Map(props) {
                     key={selectedPosition[0]}
                     position={selectedPosition}
                     interactive={false}
-                />:
-            null
+                /> :
+                null
         )
 
     }
@@ -56,19 +56,27 @@ function Map(props) {
                 center={[0, 0]}
                 zoom={13}
                 scrollWheelZoom={true}
-                style={{ height: '100%', width: '100%' }}
+                style={{
+                    height: '100%',
+                    width: '100%',
+                    borderRadius: '3em',
+                    boxSizing: 'border-box',
+                    padding: '1em',
+                    overflow: 'hidden',
+                    boxShadow: "inset 0 0 10px #000000",
+                }}
             >
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <Markers 
+                <Markers
                     myPosition={myPosition}
                     selectedPosition={selectedPosition}
                     setSelectedPosition={setSelectedPosition}
                 />
             </MapContainer>
-        </div>
+        </div >
     );
 }
 

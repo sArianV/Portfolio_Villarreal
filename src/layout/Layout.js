@@ -4,7 +4,6 @@ import {
     Flex,
     // Avatar,
     HStack,
-    //Link,
     IconButton,
     /* Button,
     Menu,
@@ -43,13 +42,12 @@ const Layout = ({ children }) => {
                 style={{
                     width: '100%',
                     minHeight: '4em',
-                    marginBottom:"1px",
+                    marginBottom: "1px",
                     zIndex: 2,
-
                 }}
             >
-                <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
-                    <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
+                <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4} py={0}>
+                    <Flex h={16} alignItems={'center'} justifyContent={'space-between'} py={0}>
                         <IconButton
                             size={'md'}
                             icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
@@ -57,7 +55,7 @@ const Layout = ({ children }) => {
                             display={{ md: 'none' }}
                             onClick={isOpen ? onClose : onOpen}
                         />
-                        <HStack spacing={8} alignItems={'center'}>
+                        <HStack py={0} spacing={8} alignItems={'center'} style={{height:"100%", padding: "0px"}}>
                             <Box
                                 onClick={handleClickLogo}
                                 style={{
@@ -69,10 +67,14 @@ const Layout = ({ children }) => {
                             <HStack
                                 as={'nav'}
                                 spacing={4}
+                                height={'100%'}
                                 display={{ base: 'none', md: 'flex' }}>
 
                                 {Links.map((link) => (
-                                    <NavLink key={link.name} link={link} />
+                                    <NavLink
+                                        key={link.name}
+                                        link={link}
+                                    />
                                 ))}
 
                             </HStack>
@@ -103,10 +105,13 @@ const Layout = ({ children }) => {
                     </Flex>
 
                     {isOpen ? (
-                        <Box pb={4} display={{ md: 'none' }} style={{ zIndex:10}} >
+                        <Box pb={4} display={{ md: 'none' }} style={{ zIndex: 10 }} >
                             <Stack as={'nav'} spacing={4}>
                                 {Links.map((link) => (
-                                    <NavLink key={link.name + "nav"} link={link} />
+                                    <NavLink
+                                        key={link.name}
+                                        link={link}
+                                    />
                                 ))}
                             </Stack>
                         </Box>

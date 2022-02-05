@@ -7,9 +7,10 @@ function MapContainer(props) {
     return (
         <div className={styles.root}>
             <div className={styles.search_bar}>
-               searchbar 
+               <p> {"use searchbar to find a city location ( TBD )"}</p>
             </div>
             <div className={styles.map_container}>
+                or click on the map to select a location
                 <Map 
                     selectedPosition={selectedPosition}
                     setSelectedPosition={setSelectedPosition}
