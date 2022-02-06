@@ -18,12 +18,12 @@ function WeatherContainer({ selectedPosition }) {
     }, [latitude, longitude]);
 
     return (
-        <div style={{ width: "100%", height: "100%",display:"flex", flexDirection:"column" , paddingTop:"50px"}}>
+        <div style={{ width: "100%", height: "100%",display:"flex", flexDirection:"column" }}>
 
             {weather &&
                 <div >
 
-                    <div style={{ margin: "50px 0px 20px 10px" }}>
+                    <div style={{ padding: "10px 0px 20px 10px" }}>
                         <Heading as='h3' size='lg'>
                             {weather?.name} , {weather?.sys.country}
                         </Heading>
