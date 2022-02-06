@@ -14,13 +14,13 @@ function Weather() {
     return (
         <SimpleGrid columns={responsiveColums} spacingX='20px' spacingY='10px' className={styles.box}>
             <Box className={styles.map} >
-                <MapContainer 
+                <MapContainer
                     selectedPosition={selectedPosition}
                     setSelectedPosition={setSelectedPosition}
                 />
             </Box>
-            <Box className={styles.weather_container} > 
-                <WeatherContainer 
+            <Box className={styles.weather_container} >
+                <WeatherContainer
                     selectedPosition={selectedPosition}
                 />
             </Box>

@@ -22,17 +22,18 @@ function Map(props) {
 
         useEffect(() => {
             if (!selectedPosition && myPosition) {
-                map.flyTo(myPosition, 15);
+                map.flyTo(myPosition, 9);
                 setSelectedPosition(myPosition)
             }
         }, [myPosition]);
 
         const map = useMapEvents({
             click(e) {
-                map.flyTo(e.latlng, 13);
+                const coord = e.latlng.wrap()
+                map.flyTo(coord, 9);
                 setSelectedPosition([
-                    e.latlng.lat,
-                    e.latlng.lng
+                    coord.lat,
+                    coord.lng
                 ]);
             },
 
@@ -57,8 +58,8 @@ function Map(props) {
                 zoom={13}
                 scrollWheelZoom={true}
                 style={{
-                    height: '100%',
-                    width: '100%',
+                    height: 'calc( 100% ) ',
+                    width: 'calc( 100% )',
                     borderRadius: '3em',
                     boxSizing: 'border-box',
                     padding: '1em',
