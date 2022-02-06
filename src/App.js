@@ -1,17 +1,16 @@
 import * as React from 'react'
-import { extendTheme, ChakraProvider } from '@chakra-ui/react'
+import { extendTheme, theme, ChakraProvider } from '@chakra-ui/react'
 import Routes from "./routes/Routes.js"
 import './App.css'
-
-const colors = {
-  brand: {
-    900: '#1a365d',
-    800: '#153e75',
-    700: '#2a69ac',
-  },
+/*
+// 2. Add your color mode config
+ const config = {
+  initialColorMode: 'dark',
+  useSystemColorMode: false,
 }
 
-const theme = extendTheme({ colors })
+// 3. extend the theme
+const theme = extendTheme({ config }) */
 
 
 function App() {
