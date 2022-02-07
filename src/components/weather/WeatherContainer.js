@@ -39,9 +39,9 @@ function WeatherContainer({ selectedPosition }) {
                         </Text>
                     </div>
 
-                    <div style={{ width: "80%", display: "flex" ,alignContent: "center"}}>
+                    <div style={{ width: "90%", display: "flex" ,alignContent: "center"}}>
                         <div style={{width: "50%"}}>
-                            <div style={{ minWidth: "100px", display: "flex", alignItems: "center" }}>
+                            <div style={{ minWidth: "120px", display: "flex", alignItems: "center" }}>
                                 <img src={`http://openweathermap.org/img/wn/${weather?.weather[0].icon}.png`} />
                                 <Text fontSize='5xl'>
                                     {weather?.main?.temp ? (Math.round(weather?.main?.temp) + "°") : null}
