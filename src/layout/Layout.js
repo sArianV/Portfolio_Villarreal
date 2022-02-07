@@ -14,6 +14,7 @@ import {
     useDisclosure,
     useColorModeValue,
     Stack,
+    Heading,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { Links } from './links';
@@ -47,7 +48,7 @@ const Layout = ({ children }) => {
                     zIndex: 2,
                 }}
             >
-                                                
+
 
                 <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4} py={0}>
                     <Flex h={16} alignItems={'center'} justifyContent={'space-between'} py={0}>
@@ -58,15 +59,17 @@ const Layout = ({ children }) => {
                             display={{ md: 'none' }}
                             onClick={isOpen ? onClose : onOpen}
                         />
-                        <HStack py={0} spacing={8} alignItems={'center'} style={{height:"100%", padding: "0px", zIndex:"1"}}>
+                        <HStack py={0} spacing={8} alignItems={'center'} style={{ height: "100%", padding: "0px", zIndex: "1" }}>
                             <Box
                                 onClick={handleClickLogo}
                                 style={{
                                     cursor: 'pointer',
-                                    marginRight:"10vw"
+                                    marginRight: "10vw"
                                 }}
                             >
-                                logo_portfolio_arian
+                                <Heading size='lg'>
+                                    Arian's Portfolio
+                                </Heading>
                             </Box>
                             <HStack
                                 as={'nav'}

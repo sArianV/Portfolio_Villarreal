@@ -12,8 +12,8 @@ function Rutas() {
         <BrowserRouter>
             <Layout>
                 <Routes>
-                    <Route path="/" element={<p>home</p>} />
-                    <Route path="/sandbox" element={<p>sandbox</p>} />
+                    <Route path="/" element={<p>Landing page (TBD)</p>} />
+                    <Route path="/sandbox" element={<p>Sandbox page (TBD)</p>} />
                     <Route path="/weather" element={ <WeatherScreen />} />
                 </Routes>
             </Layout>

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import {
     Link,
-    useColorModeValue,
-
+    useColorModeValue
 } from '@chakra-ui/react';
 import { NavLink as RouterLink } from 'react-router-dom';
 
@@ -22,8 +21,8 @@ const NavLink = ({ link }) => {
                     textDecoration: 'none',
                     bg: useColorModeValue( 'gray.200', 'gray.700'),
                 }}
-                
-                    bg={ useColorModeValue( isActive ?'gray.200': '', isActive? 'gray.700' :'') }
+                fontWeight='semibold'
+                bg={ useColorModeValue( isActive ?'gray.200': '', isActive? 'gray.700' :'') }
                 
                 text={link.name}
             >

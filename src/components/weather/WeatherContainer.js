@@ -10,7 +10,11 @@ function WeatherContainer({ selectedPosition }) {
         const response = await getWeather(latitude, longitude)
         setWeather(response)
     }
-
+    function degToCompass(num) {
+        var val = Math.floor((num / 22.5) + 0.5);
+        var arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
+        return arr[(val % 16)];
+    }
     useEffect(() => {
         if (latitude && longitude) {
             fetchData(latitude, longitude);
@@ -18,62 +22,52 @@ function WeatherContainer({ selectedPosition }) {
     }, [latitude, longitude]);
 
     return (
-        <div style={{ width: "100%", height: "100%",display:"flex", flexDirection:"column" }}>
+        <div style={{ width: "100%", height: "100%", paddingLeft: "20%" }}>
 
             {weather &&
                 <div >
 
-                    <div style={{ padding: "10px 0px 20px 10px" }}>
+                    <div style={{ padding: "10px 0px 10px 0px" }}>
                         <Heading as='h3' size='lg'>
                             {weather?.name} , {weather?.sys.country}
                         </Heading>
+                        <Text
+                            fontSize='md'
+                            textTransform='capitalize'
+                        >
+                            {weather?.weather[0].description}
+                        </Text>
                     </div>
 
-                    <div style={{margin: "0px 0px 0px 30px" }}>
-                        <div style={{minWidth: "200px", minHeight:"50px", display:"flex", alignItems:"center"}}>
-                           <Text fontSize='2xl'>
-                            {weather?.weather[0].description} 
-                            </Text> 
-                            <img src={`http://openweathermap.org/img/wn/${weather?.weather[0].icon}.png`} />
+                    <div style={{ width: "100%", display: "flex" ,alignContent: "center"}}>
+                        <div style={{width: "50%"}}>
+                            <div style={{ minWidth: "150px", display: "flex", alignItems: "center" }}>
+                                <img src={`http://openweathermap.org/img/wn/${weather?.weather[0].icon}.png`} />
+                                <Text fontSize='5xl'>
+                                    {weather?.main?.temp ? (Math.round(weather?.main?.temp) + "°") : null}
+                                </Text>
+                            </div>
+                            <div style={{ paddingLeft: "10px" }}>
+                                <Text fontSize='sm'>
+                                    Real feed {weather?.main?.feels_like ? (Math.round(weather?.main?.feels_like) + "°") : null}
+                                </Text>
+                            </div>
                         </div>
-                        
-                        <p>Temperatura: </p>
-                        <div style={{ marginLeft: "30px"}}>
-                            <p>
-                                actual: {weather?.main?.temp ? (Math.round(weather?.main?.temp) + "°") : null}
-                            </p>
-                            <p>
-                                sensación termica: {weather?.main?.feels_like ? (Math.round(weather?.main?.feels_like) + "°") : null}
-                            </p>
-                            <p>
-                                min: {weather?.main?.temp_min ? (Math.round(weather?.main?.temp_min) + "°") : null}
-                            </p>
-                            <p>
-                                max: {weather?.main?.temp_max ? (Math.round(weather?.main?.temp_max) + "°") : null}
-                            </p>
-                        </div>
-                        <br />
-                        <p>
-                            Humedad: {weather?.main?.humidity ? (weather?.main?.humidity + "%") : null}
-                        </p>
-                        <br />
-                        <p>
-                            Presión: {weather?.main?.pressure ? (weather?.main?.pressure + "hPa") : null}
-                        </p>
-                        <br />
-                        <p>
-                            Viento:
-                        </p>
-                        <div style={{ marginLeft: "30px"}}>
-                            <p>
-                                velocidad {weather?.wind?.speed ? (weather?.wind?.speed + "m/s") : null}
-                            </p>
-                            <p>
-                                dirección {weather?.wind?.deg ? (weather?.wind?.deg + "°") : null}
-                            </p>
+                        <div style={{width: "50%", paddingTop:"1em"}}>
+                            <Text fontSize='sm'>
+                                Min: {weather?.main?.temp_min ? (Math.round(weather?.main?.temp_min) + "°") : null}
+                            </Text>
+                            <Text fontSize='sm'>
+                                Max: {weather?.main?.temp_max ? (Math.round(weather?.main?.temp_max) + "°") : null}
+                            </Text>
+                            <Text fontSize='sm'>
+                                Humidity: {weather?.main?.humidity ? (weather?.main?.humidity + "%") : null}
+                            </Text>
+                            <Text fontSize='sm'>
+                                Wind: {weather?.wind?.speed ? (weather?.wind?.speed + "m/s") : null} {weather?.wind?.deg ? degToCompass(weather?.wind?.deg) : null}
+                            </Text>
                         </div>
                     </div>
-
 
                 </div>
             }
