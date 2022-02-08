@@ -1,28 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { getWeather } from '../../services/weather';
 import { Heading, Text } from '@chakra-ui/react'
 import styles from './weatherContainer.module.css';
+import WeatherContext from '../../context/weather/weatherContext';
 
-function WeatherContainer({ selectedPosition }) {
-    const [latitude, longitude] = selectedPosition != null ? selectedPosition : [];
-    const [weather, setWeather] = useState();
+function WeatherContainer() {
 
-    const fetchData = async (latitude, longitude) => {
-        const response = await getWeather(latitude, longitude)
-        setWeather(response)
-    }
+    const weatherContext = useContext(WeatherContext);
+    const { location, getActualWeather, weather } = weatherContext;
 
     function degToCompass(num) {
         var val = Math.floor((num / 22.5) + 0.5);
         var arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
         return arr[(val % 16)];
     }
-    
+        console.log(weather)
     useEffect(() => {
-        if (latitude && longitude) {
-            fetchData(latitude, longitude);
+        
+        if ( location ) {
+            const [ latitude, longitude ] = location;
+            getActualWeather(latitude, longitude);
         }
-    }, [latitude, longitude]);
+    }, [location]);
 
     return (
         <div className={styles.root}>

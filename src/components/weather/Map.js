@@ -1,54 +1,53 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useMapEvents } from 'react-leaflet';
 import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 import styles from './map.module.css';
+import WeatherContext from '../../context/weather/weatherContext';
+
+const Markers = ({location, setLocation}) => {
+
+    useEffect(() => {
+        if (location) {
+            map.flyTo(location, 9);
+        }
+    }, [location]);
+
+    const map = useMapEvents({
+        click(e) {
+            const coord = e.latlng.wrap()
+            setLocation(
+                coord.lat,
+                coord.lng
+            );
+        },
+
+    })
+
+    return (
+        location ?
+            <Marker
+                key={location[0]}
+                position={location}
+                interactive={false}
+            /> :
+            null
+    )
+
+}
 
 function Map(props) {
-    const [myPosition, setMyPosition] = useState()
-    const { selectedPosition, setSelectedPosition } = props
+
+    const weatherContext = useContext(WeatherContext);
+    const { setLocation, location } = weatherContext;
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(position => {
             const { latitude, longitude } = position.coords;
             if (latitude && longitude) {
-                setMyPosition([latitude, longitude]);
+                setLocation(latitude, longitude);
             }
         });
     }, []);
-
-    const Markers = (props) => {
-        const { myPosition, selectedPosition, setSelectedPosition } = props;
-
-        useEffect(() => {
-            if (!selectedPosition && myPosition) {
-                map.flyTo(myPosition, 9);
-                setSelectedPosition(myPosition)
-            }
-        }, [myPosition]);
-
-        const map = useMapEvents({
-            click(e) {
-                const coord = e.latlng.wrap()
-                map.flyTo(coord, 9);
-                setSelectedPosition([
-                    coord.lat,
-                    coord.lng
-                ]);
-            },
-
-        })
-
-        return (
-            selectedPosition ?
-                <Marker
-                    key={selectedPosition[0]}
-                    position={selectedPosition}
-                    interactive={false}
-                /> :
-                null
-        )
-
-    }
 
     return (
         <div className={styles.root} >
@@ -70,10 +69,9 @@ function Map(props) {
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <Markers
-                    myPosition={myPosition}
-                    selectedPosition={selectedPosition}
-                    setSelectedPosition={setSelectedPosition}
+                <Markers 
+                    location={location}
+                    setLocation={setLocation}
                 />
             </MapContainer>
         </div >

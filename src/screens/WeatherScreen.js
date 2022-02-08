@@ -1,38 +1,32 @@
 import React, { useState } from 'react';
 import { Box, SimpleGrid } from '@chakra-ui/react';
 import MapContainer from '../components/weather/MapContainer';
-
-import styles from './weatherScreen.module.css';
 import { extendTheme } from '@chakra-ui/react'
 import { createBreakpoints } from '@chakra-ui/theme-tools'
+import styles from './weatherScreen.module.css';
 import WeatherContainer from '../components/weather/WeatherContainer';
 import ExtendedWeather from '../components/weather/ExtendedWeather';
-
+import WeatherState from "../context/weather/weatherState";
 
 function Weather() {
-    const [selectedPosition, setSelectedPosition] = useState();
     return (
-        <SimpleGrid columns={responsiveColums} spacingX='20px' spacingY='10px' className={styles.box}>
-            <Box className={styles.map} >
-                <MapContainer
-                    selectedPosition={selectedPosition}
-                    setSelectedPosition={setSelectedPosition}
-                />
-            </Box>
-            <Box className={styles.weather_container} >
+        <WeatherState >
+            <SimpleGrid columns={responsiveColums} spacingX='20px' spacingY='10px' className={styles.box}>
+                <Box className={styles.map} >
+                    <MapContainer />
+                </Box>
+                <Box className={styles.weather_container} >
 
-                {selectedPosition &&
-                    <WeatherContainer
-                        selectedPosition={selectedPosition}
-                    />
-                }
-                {
-                    selectedPosition &&
-                    <ExtendedWeather selectedPosition={selectedPosition}/>
-                }
+                    
+                        <WeatherContainer />
+                    {/* 
+                        selectedPosition &&
+                        <ExtendedWeather selectedPosition={selectedPosition} /> */
+                    }
 
-            </Box>
-        </SimpleGrid>
+                </Box>
+            </SimpleGrid>
+        </WeatherState>
     );
 }
 
