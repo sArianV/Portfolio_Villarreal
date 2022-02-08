@@ -4,7 +4,7 @@ const API_KEY_TOMORROW = process.env.REACT_APP_TOMORROW_API_KEY || "lUhCyjFR2mDy
 const prefix = process.env.REACT_APP_Local_Enviroment ? "http" : "https" ;
 
 export const getWeather = async ( latitude, longitude ) => {
-    const url = `${prefix}://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY_OPEN}&units=metric&lang=sp`
+    const url = `${prefix}://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY_OPEN}&units=metric`
     try {
         const response = await axios.get(url)
 
