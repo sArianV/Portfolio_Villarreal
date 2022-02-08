@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Box, SimpleGrid, Wrap, WrapItem } from '@chakra-ui/react';
+import { Box, SimpleGrid } from '@chakra-ui/react';
 import MapContainer from '../components/weather/MapContainer';
 
 import styles from './weatherScreen.module.css';
 import { extendTheme } from '@chakra-ui/react'
 import { createBreakpoints } from '@chakra-ui/theme-tools'
 import WeatherContainer from '../components/weather/WeatherContainer';
-
+import ExtendedWeather from '../components/weather/ExtendedWeather';
 
 
 function Weather() {
@@ -20,9 +20,17 @@ function Weather() {
                 />
             </Box>
             <Box className={styles.weather_container} >
-                <WeatherContainer
-                    selectedPosition={selectedPosition}
-                />
+
+                {selectedPosition &&
+                    <WeatherContainer
+                        selectedPosition={selectedPosition}
+                    />
+                }
+                {
+                    selectedPosition &&
+                    <ExtendedWeather selectedPosition={selectedPosition}/>
+                }
+
             </Box>
         </SimpleGrid>
     );

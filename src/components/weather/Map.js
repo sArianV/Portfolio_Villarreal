@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMapEvents } from 'react-leaflet';
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
-import { useSize } from '../../hooks/useResizeObserver';
+import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 import styles from './map.module.css';
 
 function Map(props) {

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getWeather } from '../../services/weather';
 import { Heading, Text } from '@chakra-ui/react'
+import styles from './weatherContainer.module.css';
 
 function WeatherContainer({ selectedPosition }) {
     const [latitude, longitude] = selectedPosition != null ? selectedPosition : [];
@@ -10,11 +11,13 @@ function WeatherContainer({ selectedPosition }) {
         const response = await getWeather(latitude, longitude)
         setWeather(response)
     }
+
     function degToCompass(num) {
         var val = Math.floor((num / 22.5) + 0.5);
         var arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
         return arr[(val % 16)];
     }
+    
     useEffect(() => {
         if (latitude && longitude) {
             fetchData(latitude, longitude);
@@ -22,12 +25,12 @@ function WeatherContainer({ selectedPosition }) {
     }, [latitude, longitude]);
 
     return (
-        <div style={{ width: "100%", height: "100%", paddingLeft: "20%" }}>
+        <div className={styles.root}>
 
             {weather &&
                 <div >
 
-                    <div style={{ padding: "10px 0px 10px 0px" }}>
+                    <div className={styles.city_resume}>
                         <Heading as='h3' size='lg'>
                             {weather?.name} , {weather?.sys.country}
                         </Heading>
@@ -39,9 +42,9 @@ function WeatherContainer({ selectedPosition }) {
                         </Text>
                     </div>
 
-                    <div style={{ width: "90%", display: "flex" ,alignContent: "center"}}>
+                    <div className={styles.weather_info_container}>
                         <div style={{width: "50%"}}>
-                            <div style={{ minWidth: "120px", display: "flex", alignItems: "center" }}>
+                            <div className={styles.temperature_resume}>
                                 <img src={`http://openweathermap.org/img/wn/${weather?.weather[0].icon}.png`} />
                                 <Text fontSize='5xl'>
                                     {weather?.main?.temp ? (Math.round(weather?.main?.temp) + "°") : null}

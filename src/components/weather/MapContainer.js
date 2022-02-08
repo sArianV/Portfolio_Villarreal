@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React from 'react';
 import styles from './mapContainer.module.css';
 import Map from './Map';
 import { Heading } from '@chakra-ui/react';
