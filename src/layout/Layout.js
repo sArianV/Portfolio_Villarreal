@@ -68,7 +68,7 @@ const Layout = ({ children }) => {
                                 }}
                             >
                                 <Heading size='lg'>
-                                    Arian's Portfolio
+                                    Weather App
                                 </Heading>
                             </Box>
                             <HStack
@@ -77,12 +77,12 @@ const Layout = ({ children }) => {
                                 height={'100%'}
                                 display={{ base: 'none', md: 'flex' }}>
 
-                                {Links.map((link) => (
+                                {/* {Links.map((link) => (
                                     <NavLink
                                         key={link.name}
                                         link={link}
                                     />
-                                ))}
+                                ))} */}
 
                             </HStack>
                         </HStack>

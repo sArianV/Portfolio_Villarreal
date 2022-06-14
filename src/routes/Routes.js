@@ -12,9 +12,9 @@ function Rutas() {
         <BrowserRouter>
             <Layout>
                 <Routes>
-                    <Route path="/" element={<p>Landing page (TBD)</p>} />
+                    <Route path="/" element={<WeatherScreen />} />{/* 
                     <Route path="/sandbox" element={<p>Sandbox page (TBD)</p>} />
-                    <Route path="/weather" element={ <WeatherScreen />} />
+                    <Route path="/weather" element={ <WeatherScreen />} /> */}
                 </Routes>
             </Layout>
         </BrowserRouter>
